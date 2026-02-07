@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Our Love Game 💘</title>
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color:white;
+    overflow:hidden;
+}
+
+.container {
+    margin-top:15vh;
+}
+
+h1 {
+    font-size:28px;
+}
+
+button {
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+    position:absolute;
+}
+
+#yes {
+    background:white;
+    color:#ff4f81;
+    left:40%;
+    top:55%;
+}
+
+#no {
+    background:#ff4f81;
+    color:white;
+    left:55%;
+    top:55%;
+}
+
+button:hover {
+    transform:scale(1.1);
+}
+
+.hidden {
+    display:none;
+}
+
+.heart {
+    position:absolute;
+    font-size:24px;
+    animation:float 3s linear infinite;
+}
+
+@keyframes float {
+    0% { transform:translateY(0); opacity:1;}
+    100% { transform:translateY(-600px); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+    <h1>🌹 Hey Beautiful, I am your Rudra 🌹</h1>
+    <p>Do you want to stay with me forever😍? until my last breath 💍</p>
+</div>
+
+<button id="yes">Yes ❤️</button>
+<button id="no">No 😏</button>
+
+<div class="container hidden" id="final">
+    <h1>💖 I KNEW IT Buauty 😍💖</h1>
+    <p>You just made me the happiest person alive 🫀</p>
+    <h2>💝Forever starts now 💍✨</h2>
+    <h2>😘Love You so much My Lifeline 💕 </h2>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const finalScreen = document.getElementById("final");
+const mainScreen = document.getElementById("main");
+
+let yesAttempts = 0;
+
+function moveButton(button) {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+}
+
+noBtn.onmouseover = function() {
+    moveButton(noBtn);
+};
+
+yesBtn.onmouseover = function() {
+    if (yesAttempts < 3) {
+        yesAttempts++;
+        moveButton(yesBtn);
+    }
+};
+
+yesBtn.onclick = function() {
+    if (yesAttempts >= 3) {
+        mainScreen.classList.add("hidden");
+        yesBtn.style.display = "none";
+        noBtn.style.display = "none";
+        finalScreen.classList.remove("hidden");
+        createHearts();
+    }
+};
+
+function createHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+    }, 200);
+}
+</script>
+
+</body>
+</html>
